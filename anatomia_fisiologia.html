@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomía y Fisiología Humana — Bloque III</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A2E;
+    --accent: #C0392B;
+    --accent2: #E67E22;
+    --muted: #6B6B7B;
+    --card-bg: #FFFFFF;
+    --border: #E0D8CC;
+    --section-bg: #F9F5EF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--dark);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 2px 20px rgba(0,0,0,.4);
+  }
+  nav a {
+    color: #fff; text-decoration: none;
+    font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+    padding: 1rem .6rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color .25s, color .25s;
+    flex-shrink: 0;
+  }
+  nav a:hover { border-bottom-color: var(--accent2); color: var(--accent2); }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 900;
+    color: var(--accent2);
+    margin-right: auto;
+    flex-shrink: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 92vh;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(192,57,43,.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(230,126,34,.12) 0%, transparent 55%);
+  }
+  .hero-tag {
+    background: rgba(192,57,43,.25);
+    border: 1px solid rgba(192,57,43,.5);
+    color: #F4A261;
+    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem 1rem; border-radius: 20px;
+    margin-bottom: 1.5rem; display: inline-block;
+    animation: fadeUp .8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900; color: #fff;
+    line-height: 1.1; margin-bottom: 1rem;
+    animation: fadeUp .9s .1s ease both;
+  }
+  .hero h1 span { color: var(--accent2); }
+  .hero p {
+    max-width: 600px; color: rgba(255,255,255,.7);
+    font-size: 1.1rem; margin-bottom: 2.5rem;
+    animation: fadeUp .9s .2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp .9s .3s ease both;
+  }
+  .btn {
+    padding: .75rem 2rem; border-radius: 6px;
+    font-weight: 600; font-size: .9rem; cursor: pointer;
+    text-decoration: none; transition: transform .2s, box-shadow .2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 4px 20px rgba(192,57,43,.4);
+  }
+  .btn-outline {
+    background: transparent; color: #fff;
+    border: 1.5px solid rgba(255,255,255,.4);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 5rem 1.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: .5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted); max-width: 640px; margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+
+  /* ─── OVERVIEW CARDS ─── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .ov-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: transform .25s, box-shadow .25s;
+    position: relative; overflow: hidden;
+  }
+  .ov-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+    border-radius: 4px 0 0 4px;
+  }
+  .ov-card:nth-child(2)::after { background: #2980b9; }
+  .ov-card:nth-child(3)::after { background: #27ae60; }
+  .ov-card:nth-child(4)::after { background: var(--accent2); }
+  .ov-card:nth-child(5)::after { background: #8e44ad; }
+  .ov-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); }
+  .ov-icon { font-size: 2rem; margin-bottom: .75rem; }
+  .ov-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: .5rem; }
+  .ov-card p { font-size: .9rem; color: var(--muted); }
+
+  /* ─── TOPIC SECTION ─── */
+  .topic-section { background: var(--section-bg); }
+  .topic-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .topic-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 900; color: #fff;
+    flex-shrink: 0;
+  }
+  .topic-num.c1 { background: var(--accent); }
+  .topic-num.c2 { background: #2980b9; }
+  .topic-num.c3 { background: #27ae60; }
+  .topic-num.c4 { background: var(--accent2); }
+  .topic-num.c5 { background: #8e44ad; }
+
+  /* ─── CONTENT CARDS ─── */
+  .content-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  @media(max-width: 700px) { .content-grid { grid-template-columns: 1fr; } }
+  .content-card {
+    background: #fff; border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .content-card-img {
+    width: 100%; height: 180px; object-fit: cover;
+    background: linear-gradient(135deg, #e8d5b0, #d4b896);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .content-card-body { padding: 1.25rem 1.5rem; }
+  .content-card-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; margin-bottom: .5rem;
+  }
+  .content-card-body p { font-size: .88rem; color: #444; line-height: 1.6; }
+
+  .info-box {
+    background: #fff; border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem 1.75rem; margin: 1.5rem 0;
+    font-size: .9rem; color: #333;
+  }
+  .info-box.blue { border-color: #2980b9; }
+  .info-box.green { border-color: #27ae60; }
+  .info-box.orange { border-color: var(--accent2); }
+  .info-box.purple { border-color: #8e44ad; }
+  .info-box strong { display: block; font-size: .95rem; margin-bottom: .3rem; }
+
+  .list-items {
+    list-style: none; margin: 1rem 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: .6rem;
+  }
+  .list-items li {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 8px; padding: .6rem 1rem;
+    font-size: .88rem; display: flex; align-items: center; gap: .5rem;
+  }
+  .list-items li::before { content: '▸'; color: var(--accent); font-size: .7rem; }
+
+  /* ─── DIAGRAM / VISUAL ─── */
+  .visual-embed {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    margin: 2rem 0;
+  }
+  .visual-embed iframe {
+    width: 100%; height: 380px; border: none;
+    display: block;
+  }
+  .visual-fallback {
+    padding: 2rem; text-align: center;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 200px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem;
+  }
+  .visual-fallback .big-icon { font-size: 4rem; }
+  .visual-fallback h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+  .visual-fallback p { opacity: .7; font-size: .9rem; max-width: 400px; }
+
+  /* ─── TABLE ─── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    font-size: .88rem; margin: 1.5rem 0;
+    background: #fff; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--dark); color: #fff;
+    padding: .9rem 1.2rem; text-align: left;
+    font-weight: 600; font-size: .8rem; letter-spacing: .03em;
+  }
+  .data-table td { padding: .8rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #f9f5ef; }
+
+  /* ─── APA REFERENCES ─── */
+  .refs-section { background: var(--dark); color: #fff; }
+  .refs-section .section-title { color: #fff; }
+  .refs-section .section-sub { color: rgba(255,255,255,.6); }
+  .refs-section .section-label { color: var(--accent2); }
+  .ref-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .ref-item {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    font-size: .88rem; line-height: 1.65; color: rgba(255,255,255,.85);
+  }
+  .ref-item span { color: var(--accent2); font-weight: 600; font-size: .72rem;
+    letter-spacing: .08em; text-transform: uppercase; display: block; margin-bottom: .3rem; }
+
+  /* ─── TEAM ─── */
+  .team-section { background: #fff; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.25rem;
+  }
+  .team-card {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform .2s;
+  }
+  .team-card:hover { transform: translateY(-3px); }
+  .team-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900; color: #fff;
+    margin: 0 auto 1rem;
+  }
+  .team-card h4 { font-size: .92rem; font-weight: 600; margin-bottom: .25rem; }
+  .team-card p { font-size: .78rem; color: var(--muted); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0d0d1a; color: rgba(255,255,255,.5);
+    text-align: center; padding: 2rem;
+    font-size: .8rem;
+  }
+  footer strong { color: var(--accent2); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+    .topic-header { flex-direction: column; align-items: flex-start; }
+    nav { gap: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">A&F Humana</span>
+  <a href="#overview">Inicio</a>
+  <a href="#percepcion">Percepción</a>
+  <a href="#locomocion">Locomoción</a>
+  <a href="#autorregulacion">Autorregulación</a>
+  <a href="#intercambio">Intercambio</a>
+  <a href="#reproduccion">Reproducción</a>
+  <a href="#referencias">Referencias</a>
+
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-tag">UAEH Prepa Uno</span>
+  <h1>Anatomía y <span>Fisiología</span><br>Humana</h1>
+  <p>Explora los sistemas y aparatos que conforman el cuerpo humano: su estructura, función e integración para mantener la vida.</p>
+  <div class="hero-btns">
+    <a href="#overview" class="btn btn-primary">Explorar temas</a>
+    <a href="#referencias" class="btn btn-outline">Ver referencias</a>
+  </div>
+</header>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <p class="section-label">Organización temática</p>
+    <h2 class="section-title">Sistemas del Cuerpo Humano</h2>
+    <p class="section-sub">El cuerpo humano está organizado en sistemas especializados que trabajan de manera coordinada para mantener la homeostasis y permitir la vida.</p>
+    <div class="overview-grid">
+      <div class="ov-card fade-in">
+        <div class="ov-icon">👁️</div>
+        <h3>Percepción del Entorno</h3>
+        <p>Piel, tegumentos internos y órganos de los sentidos que nos permiten interactuar con el mundo exterior.</p>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-icon">🦴</div>
+        <h3>Locomoción</h3>
+        <p>Sistema óseo, articular y muscular que proporciona soporte estructural y permite el movimiento corporal.</p>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-icon">🧠</div>
+        <h3>Autorregulación</h3>
+        <p>Sistema nervioso, endócrino e inmunológico que coordinan y regulan las funciones del organismo.</p>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-icon">❤️</div>
+        <h3>Intercambio y Transporte</h3>
+        <p>Aparatos cardiovascular, respiratorio, digestivo y sistema excretor para el intercambio de sustancias.</p>
+      </div>
+      <div class="ov-card fade-in">
+        <div class="ov-icon">🧬</div>
+        <h3>Reproducción</h3>
+        <p>Aparatos reproductores, gametogénesis y fecundación para la perpetuación de la especie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     1. PERCEPCIÓN DEL ENTORNO
+══════════════════════════════════════════════════ -->
+<section id="percepcion" class="topic-section">
+  <div class="container">
+    <div class="topic-header">
+      <div class="topic-num c1">1</div>
+      <div>
+        <p class="section-label">Tema 1</p>
+        <h2 class="section-title" style="margin:0">Percepción del Entorno</h2>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">🧴</div>
+        <div class="content-card-body">
+          <h4>Piel y sus Funciones</h4>
+          <p>La piel es el órgano más extenso del cuerpo humano, con un área aproximada de 1.5 a 2 m². Está formada por tres capas: <strong>epidermis</strong> (capa superficial, sin vasos), <strong>dermis</strong> (tejido conjuntivo con vasos, nervios y glándulas) e <strong>hipodermis</strong> (grasa subcutánea y vasos mayores).</p>
+          <p style="margin-top:.5rem">Sus funciones principales son: protección mecánica, química y biológica; termorregulación; síntesis de vitamina D; percepción sensorial; y barrera contra la pérdida de agua.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">🔬</div>
+        <div class="content-card-body">
+          <h4>Tegumentos Internos</h4>
+          <p>Los tegumentos internos son membranas que revisten órganos y cavidades del cuerpo. Incluyen las <strong>mucosas</strong> (recubren cavidades abiertas al exterior como el tubo digestivo y respiratorio) y las <strong>serosas</strong> (recubren cavidades cerradas como pleura, peritoneo y pericardio).</p>
+          <p style="margin-top:.5rem">Estas membranas facilitan el deslizamiento entre órganos, evitan la fricción y participan en procesos de absorción y secreción.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box fade-in">
+      <strong>🔑 Concepto clave — Homeostasis cutánea</strong>
+      La piel mantiene el equilibrio interno regulando la temperatura mediante vasodilatación/vasoconstricción y sudoración. Cuando la temperatura corporal sube, los vasos dérmicos se dilatan y las glándulas sudoríparas se activan para disipar calor por evaporación.
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; margin:2rem 0 1rem; font-size:1.4rem">Órganos de los Sentidos</h3>
+    <table class="data-table fade-in">
+      <thead>
+        <tr><th>Sentido</th><th>Órgano receptor</th><th>Estímulo detectado</th><th>Nervio craneal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vista</td><td>Ojo (retina: conos y bastones)</td><td>Luz visible (ondas electromagnéticas)</td><td>II (óptico)</td></tr>
+        <tr><td>Audición</td><td>Cóclea (células ciliadas)</td><td>Vibraciones sonoras (20–20 000 Hz)</td><td>VIII (vestibulococlear)</td></tr>
+        <tr><td>Equilibrio</td><td>Canales semicirculares y utrículo</td><td>Movimiento rotacional y lineal</td><td>VIII (vestibulococlear)</td></tr>
+        <tr><td>Gusto</td><td>Papilas gustativas (lengua)</td><td>Sustancias químicas disueltas</td><td>VII, IX, X</td></tr>
+        <tr><td>Olfato</td><td>Epitelio olfatorio (fosa nasal)</td><td>Moléculas volátiles en el aire</td><td>I (olfatorio)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">👁️</div>
+        <div class="content-card-body">
+          <h4>El Ojo — Anatomía y Fisiología</h4>
+          <p>El ojo está compuesto por tres capas: esclerótica (protección), coroides (nutrición) y retina (fotorreceptores). La luz entra por la córnea, se enfoca mediante el cristalino —cuya curvatura ajusta el músculo ciliar— y llega a la retina donde los conos (color, visión diurna) y bastones (blanco y negro, visión nocturna) transducen la señal luminosa en impulsos nerviosos enviados al córtex visual occipital.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">👂</div>
+        <div class="content-card-body">
+          <h4>El Oído — Audición y Equilibrio</h4>
+          <p>El oído se divide en externo (pabellón y conducto auditivo), medio (tímpano y huesecillos: martillo, yunque y estribo) e interno (cóclea y canales semicirculares). Las vibraciones mecánicas se amplifican en el oído medio y se convierten en señales eléctricas en la cóclea por las células ciliadas del órgano de Corti. Los canales semicirculares detectan la aceleración angular para el equilibrio dinámico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     2. LOCOMOCIÓN
+══════════════════════════════════════════════════ -->
+<section id="locomocion">
+  <div class="container">
+    <div class="topic-header">
+      <div class="topic-num c2">2</div>
+      <div>
+        <p class="section-label">Tema 2</p>
+        <h2 class="section-title" style="margin:0">Locomoción</h2>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">💀</div>
+        <div class="content-card-body">
+          <h4>Sistema Óseo</h4>
+          <p>El esqueleto adulto consta de <strong>206 huesos</strong> organizados en dos divisiones: esqueleto axial (80 huesos: cráneo, columna vertebral, costillas y esternón) y esqueleto apendicular (126 huesos: extremidades y cinturas). Los huesos están compuestos por tejido óseo compacto (exterior denso) y esponjoso (interior trabecular), albergan médula ósea roja productora de células sanguíneas.</p>
+          <p style="margin-top:.5rem"><strong>Funciones:</strong> soporte, protección de órganos, movimiento, hematopoyesis y almacén de calcio y fósforo.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">🦵</div>
+        <div class="content-card-body">
+          <h4>Sistema Muscular</h4>
+          <p>El cuerpo humano posee más de <strong>600 músculos</strong> clasificados en: músculo esquelético (voluntario, estriado, unido a huesos), músculo liso (involuntario, en vísceras y vasos) y músculo cardíaco (involuntario, estriado, exclusivo del corazón).</p>
+          <p style="margin-top:.5rem">La contracción muscular se produce por el deslizamiento de filamentos de <strong>actina y miosina</strong> (teoría del filamento deslizante) mediado por Ca²⁺ y ATP.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box blue fade-in">
+      <strong>⚙️ Sistema Articular</strong>
+      Las articulaciones unen los huesos y se clasifican en: <strong>sinartrosis</strong> (inmóviles, ej. suturas craneales), <strong>anfiartrosis</strong> (semimóviles, ej. discos intervertebrales) y <strong>diartrosis</strong> (sinoviales, totalmente móviles). Las diartrosis contienen líquido sinovial que nutre y lubrica el cartílago articular, reduciendo la fricción.
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; margin:2rem 0 1rem; font-size:1.4rem">Tipos de movimiento articular</h3>
+    <ul class="list-items fade-in">
+      <li>Flexión / Extensión</li>
+      <li>Abducción / Aducción</li>
+      <li>Rotación interna / externa</li>
+      <li>Circunducción</li>
+      <li>Pronación / Supinación</li>
+      <li>Dorsiflexión / Flexión plantar</li>
+      <li>Inversión / Eversión del pie</li>
+    </ul>
+
+    <table class="data-table fade-in" style="margin-top:2rem">
+      <thead>
+        <tr><th>Tipo de músculo</th><th>Control</th><th>Localización</th><th>Característica histológica</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Esquelético</td><td>Voluntario</td><td>Unido a huesos</td><td>Estriado, multinucleado</td></tr>
+        <tr><td>Liso</td><td>Involuntario</td><td>Vísceras, vasos sanguíneos</td><td>No estriado, mononucleado</td></tr>
+        <tr><td>Cardíaco</td><td>Involuntario (autorítmico)</td><td>Corazón</td><td>Estriado, discos intercalares</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     3. AUTORREGULACIÓN
+══════════════════════════════════════════════════ -->
+<section id="autorregulacion" class="topic-section">
+  <div class="container">
+    <div class="topic-header">
+      <div class="topic-num c3">3</div>
+      <div>
+        <p class="section-label">Tema 3</p>
+        <h2 class="section-title" style="margin:0">Autorregulación</h2>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">🧠</div>
+        <div class="content-card-body">
+          <h4>Sistema Nervioso</h4>
+          <p>Se divide en <strong>SNC</strong> (encéfalo y médula espinal) y <strong>SNP</strong> (nervios craneales y espinales). Funcionalmente: <strong>somático</strong> (voluntario, músculos esqueléticos) y <strong>autónomo</strong> (involuntario: simpático "lucha o huida" y parasimpático "descanso y digestión").</p>
+          <p style="margin-top:.5rem">La neurona es la unidad funcional: transmite impulsos eléctricos (potenciales de acción) mediante sinapsis químicas con neurotransmisores como acetilcolina, dopamina y serotonina.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">⚗️</div>
+        <div class="content-card-body">
+          <h4>Sistema Endócrino</h4>
+          <p>Regula mediante <strong>hormonas</strong> vertidas al torrente sanguíneo. Glándulas principales: hipotálamo, hipófisis (adenohipófisis y neurohipófisis), tiroides, paratiroides, suprarrenales (corteza y médula), páncreas endócrino (islotes de Langerhans), gónadas y glándula pineal.</p>
+          <p style="margin-top:.5rem">Actúa más lentamente que el sistema nervioso pero sus efectos son más duraderos; regula metabolismo, crecimiento, reproducción y respuesta al estrés.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box green fade-in">
+      <strong>🛡️ Sistema Inmunológico</strong>
+      Defiende al organismo frente a patógenos y células anómalas. Se divide en <strong>inmunidad innata</strong> (inespecífica: barreras físicas, fagocitos, NK cells, complemento) e <strong>inmunidad adaptativa</strong> (específica: linfocitos B —producen anticuerpos— y linfocitos T —citotóxicos y colaboradores—). La respuesta humoral produce anticuerpos; la celular destruye directamente células infectadas o tumorales. La memoria inmunológica permite respuestas más rápidas ante exposiciones repetidas.
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; margin:2rem 0 1rem; font-size:1.4rem">Principales hormonas y su función</h3>
+    <table class="data-table fade-in">
+      <thead>
+        <tr><th>Hormona</th><th>Glándula</th><th>Función principal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Insulina</td><td>Páncreas (células β)</td><td>Reduce glucemia; favorece captación celular de glucosa</td></tr>
+        <tr><td>Glucagón</td><td>Páncreas (células α)</td><td>Eleva glucemia; estimula glucogenólisis hepática</td></tr>
+        <tr><td>Tiroxina (T₄)</td><td>Tiroides</td><td>Regula metabolismo basal y desarrollo</td></tr>
+        <tr><td>Cortisol</td><td>Corteza suprarrenal</td><td>Respuesta al estrés, antiinflamatorio</td></tr>
+        <tr><td>Adrenalina</td><td>Médula suprarrenal</td><td>Respuesta de lucha o huida (FC, glucemia)</td></tr>
+        <tr><td>GH (somatotropina)</td><td>Adenohipófisis</td><td>Crecimiento óseo y muscular</td></tr>
+        <tr><td>Testosterona</td><td>Testículos</td><td>Caracteres sexuales masculinos, espermatogénesis</td></tr>
+        <tr><td>Estrógenos</td><td>Ovarios</td><td>Caracteres sexuales femeninos, ciclo menstrual</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     4. INTERCAMBIO Y TRANSPORTE
+══════════════════════════════════════════════════ -->
+<section id="intercambio">
+  <div class="container">
+    <div class="topic-header">
+      <div class="topic-num c4">4</div>
+      <div>
+        <p class="section-label">Tema 4</p>
+        <h2 class="section-title" style="margin:0">Intercambio y Transporte</h2>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">❤️</div>
+        <div class="content-card-body">
+          <h4>Aparato Cardiovascular</h4>
+          <p>El corazón es una bomba muscular con cuatro cámaras: dos aurículas y dos ventrículos. Bombea sangre en dos circuitos: <strong>circulación pulmonar</strong> (ventrículo derecho → pulmones → aurícula izquierda) para oxigenar la sangre, y <strong>circulación sistémica</strong> (ventrículo izquierdo → cuerpo → aurícula derecha) para distribuir O₂ y nutrientes.</p>
+          <p style="margin-top:.5rem">Un adulto en reposo tiene una frecuencia cardíaca de 60–100 lpm y gasto cardíaco de ~5 L/min.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">🫁</div>
+        <div class="content-card-body">
+          <h4>Aparato Respiratorio</h4>
+          <p>Conduce el aire desde las vías superiores (fosas nasales, faringe, laringe) hasta las inferiores (tráquea, bronquios, bronquiolos) y llega a los <strong>alvéolos pulmonares</strong>, donde ocurre el intercambio gaseoso (hematosis): O₂ pasa a la sangre y CO₂ sale al aire.</p>
+          <p style="margin-top:.5rem">La ventilación pulmonar implica inspiración (diafragma baja, costillas suben, presión ↓) y espiración (diafragma sube, presión ↑). Capacidad pulmonar total: ~6 L.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">🍽️</div>
+        <div class="content-card-body">
+          <h4>Aparato Digestivo</h4>
+          <p>Transforma los alimentos en nutrientes absorbibles. El tubo digestivo comprende: boca (masticación y amilasa salival), esófago, estómago (digestión ácida, pH 1-3, pepsina), intestino delgado (duodeno, yeyuno, íleon; absorción de nutrientes mediante vellosidades y microvellosidades) e intestino grueso (absorción de agua, formación de heces).</p>
+          <p style="margin-top:.5rem">Glándulas anexas: hígado (bilis), páncreas exócrino (lipasas, proteasas, amilasa) y vesícula biliar.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">🫘</div>
+        <div class="content-card-body">
+          <h4>Sistema Excretor</h4>
+          <p>Elimina desechos metabólicos. Los <strong>riñones</strong> filtran ~180 L de plasma/día mediante la nefrona (glomérulo de Malpighi y túbulos); reabsorben nutrientes y agua y excretan urea, creatinina y sales en ~1.5 L de orina diaria. Regulan el equilibrio ácido-base, electrolítico y la presión arterial (sistema renina-angiotensina-aldosterona).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box orange fade-in">
+      <strong>🔗 Integración funcional</strong>
+      Estos cuatro aparatos trabajan en conjunto: el digestivo absorbe nutrientes y el cardiovascular los distribuye; el respiratorio oxigena la sangre y el excretor elimina el CO₂ disuelto y los desechos metabólicos. La alteración de uno repercute inevitablemente en los demás.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     5. REPRODUCCIÓN
+══════════════════════════════════════════════════ -->
+<section id="reproduccion" class="topic-section">
+  <div class="container">
+    <div class="topic-header">
+      <div class="topic-num c5">5</div>
+      <div>
+        <p class="section-label">Tema 5</p>
+        <h2 class="section-title" style="margin:0">Reproducción</h2>
+      </div>
+    </div>
+
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-card-img">♂️</div>
+        <div class="content-card-body">
+          <h4>Aparato Reproductor Masculino</h4>
+          <p>Órganos principales: <strong>testículos</strong> (producción de espermatozoides y testosterona), epidídimo (maduración de espermatozoides), conducto deferente, vesículas seminales, próstata (secreciones que forman el semen) y pene (órgano copulador). La espermatogénesis ocurre en los túbulos seminíferos por meiosis, produciendo ~300 millones de espermatozoides al día.</p>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-card-img">♀️</div>
+        <div class="content-card-body">
+          <h4>Aparato Reproductor Femenino</h4>
+          <p>Órganos principales: <strong>ovarios</strong> (producción de ovocitos y hormonas sexuales), trompas de Falopio (transporte del ovocito), útero (implantación y desarrollo del embrión), cuello uterino y vagina. El ciclo menstrual (≈28 días) involucra las fases folicular, ovulatoria, lútea y menstrual, reguladas por FSH, LH, estrógenos y progesterona.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box purple fade-in">
+      <strong>🔬 Gametogénesis</strong>
+      La <strong>espermatogénesis</strong> produce 4 espermatozoides funcionales por cada célula madre mediante meiosis; ocurre continuamente desde la pubertad. La <strong>ovogénesis</strong> produce 1 ovocito funcional + 3 cuerpos polares por ciclo; los folículos primarios se originan durante el desarrollo fetal y se activan con la pubertad. Ambos procesos reducen el número cromosómico de 46 (2n) a 23 (n) cromosomas, necesario para la fecundación.
+    </div>
+
+    <div class="content-card fade-in" style="margin-top:1.5rem">
+      <div class="content-card-img">🥚</div>
+      <div class="content-card-body">
+        <h4>Fecundación y Desarrollo Inicial</h4>
+        <p>La fecundación ocurre generalmente en el tercio externo de la trompa de Falopio. El espermatozoide penetra la zona pelúcida del ovocito II mediante el <strong>proceso de fecundación</strong> en tres etapas: 1) acercamiento y contacto, 2) reacción acrosómica (liberación de enzimas), 3) fusión de membranas y activación del ovocito (reacción cortical que impide la poliespermia).</p>
+        <p style="margin-top:.5rem">Se forma el cigoto (2n = 46 cromosomas) que inicia divisiones mitóticas (segmentación): mórula (16 células) → blástula → implantación en el endometrio uterino ~6-7 días post-fecundación. La placenta se desarrolla para nutrir al embrión/feto durante los ~280 días de gestación.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; margin:2rem 0 1rem; font-size:1.4rem">Etapas del desarrollo prenatal</h3>
+    <table class="data-table fade-in">
+      <thead>
+        <tr><th>Período</th><th>Duración</th><th>Eventos clave</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Preembrionario</td><td>Semanas 1-2</td><td>Segmentación, implantación, formación del disco bilaminar</td></tr>
+        <tr><td>Embrionario</td><td>Semanas 3-8</td><td>Organogénesis, gastrulación (ecto-, meso-, endodermo), neurulación</td></tr>
+        <tr><td>Fetal</td><td>Semanas 9-40</td><td>Crecimiento y maduración de órganos, movimientos fetales</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     REFERENCES
+══════════════════════════════════════════════════ -->
+<section id="referencias" class="refs-section">
+  <div class="container">
+    <p class="section-label">Fuentes académicas</p>
+    <h2 class="section-title">Referencias</h2>
+    <p class="section-sub">Toda la información presentada en este sitio fue elaborada a partir de fuentes académicas confiables en formato APA 7.ª edición.</p>
+    <ul class="ref-list">
+      <li class="ref-item">
+        <span>Libro de texto</span>
+        Tortora, G. J., &amp; Derrickson, B. H. (2018). <em>Principios de anatomía y fisiología</em> (15.ª ed.). Wiley. https://cbtis54.edu.mx/wp-content/uploads/2024/04/Principios-de-Anatomia-y-Fisiologia-Tortora-Derrickson.pdf
+      </li>
+      <li class="ref-item">
+        <span>Libro de texto</span>
+        Marieb, E. N., &amp; Hoehn, K. (2019). <em>Anatomía y fisiología humana</em> (9.ª ed.). Pearson. https://ifssa.edu.ar/ifssavirtual/cms/files/LIBRO%20IFSSA%20Anatomia.y.Fisiologia.Humana.Marieb%209aed.%20(1).pdf
+      </li>
+      <li class="ref-item">
+        <span>Recurso académico</span>
+        Universidad de Cádiz. (2022). <em>Anatomía humana</em>. Facultad de Medicina. https://medicina.uca.es/wp-content/uploads/2023/08/Anatomia-Humana-2022-1.pdf
+      </li>
+      <li class="ref-item">
+        <span>Recurso en línea</span>
+        Universidad de Valencia. (s.f.). <em>El cuerpo humano: sistemas y aparatos</em>. https://www.uv.es/hort/cuerpohumano/cuerpohumano.html
+      </li>
+      <li class="ref-item">
+        <span>Capítulo de libro</span>
+        Hall, J. E., &amp; Guyton, A. C. (2016). <em>Compendio de fisiología médica</em> (13.ª ed.). Elsevier.
+      </li>
+      <li class="ref-item">
+        <span>Artículo de revista</span>
+        Moore, K. L., Dalley, A. F., &amp; Agur, A. M. R. (2017). <em>Anatomía con orientación clínica</em> (8.ª ed.). Wolters Kluwer.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+
+<footer>
+  <p>Anatomía y Fisiología Humana · <strong>UAEH Prepa Uno</strong> · 2026</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
